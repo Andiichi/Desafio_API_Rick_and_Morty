@@ -23,14 +23,20 @@ def get_profile(id):
     return render_template('profile.html', profile=data_dict)
 
 
-@app.route('/episode/<id>')
-def get_episodes(id):
-    url = 'https://rickandmortyapi.com/api/episode/' + id
+@app.route('/episodes')
+def get_episodes():
+    url = 'https://rickandmortyapi.com/api/episode/'
     response = urllib.request.urlopen(url)
     data = response.read()
     data_dict = json.loads(data)
 
-    return render_template('episodes.html', profile=data_dict)
+    episodes_dict= []
+
+    for episode in episodes_dict['results']:
+        episodes_dict.append(episode)
+    
+    return jsonify({'results': episodes_dict})
+
 
 
 @app.route('/lista')
