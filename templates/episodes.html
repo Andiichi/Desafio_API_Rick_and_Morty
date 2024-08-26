@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <div class="row">
+      
+    <div class="col-sm-3 col-6">
+      <img src="{{profile.image}}" alt="{{profile.name}}" 
+      class=" img-fluid img-thumbnail" />
+    </div>
+
+    <div class="col-sm-3 col-6">
+      <h1 class="display-5">{{profile.name}}</h1>
+      <h1 class="h6">Episodes: {{profile.episode}}</h1>
+
+  </div>
+{% endblock %}
