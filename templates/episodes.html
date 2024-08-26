@@ -1,16 +1,22 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <div class="row">
-      
-    <div class="col-sm-3 col-6">
-      <img src="{{profile.image}}" alt="{{profile.name}}" 
-      class=" img-fluid img-thumbnail" />
-    </div>
-
-    <div class="col-sm-3 col-6">
-      <h1 class="display-5">{{profile.name}}</h1>
-      <h1 class="h6">Episodes: {{profile.episode}}</h1>
-
-  </div>
+<h1>Episodes List</h1>
+<ul>
+    {% for episode in episodes %}
+    <li>
+        <h2>{{ episode.name }} (Season {{ episode.episode }})</h2>
+        <p><strong>Air Date:</strong> {{ episode.air_date }}</p>
+        <p><strong>Characters:</strong></p>
+        <ul>
+            {% for character_url in episode.characters %}
+            <li>
+                <!-- Aqui você pode criar um link para o perfil do personagem -->
+                <a href="{{ character_url }}">{{ character_url }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
