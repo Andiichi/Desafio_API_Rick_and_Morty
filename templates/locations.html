@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Lista de Localizações</h1>
+<ul>
+    {% for location in locations %}
+    <li>
+        <h2>Nome: {{ location.name }}</h2>
+        <p><strong>Tipo:</strong> {{ location.type }}</p>
+        <p><strong>Dimensão:</strong> {{ location.dimension }}</p>
+        <p><strong>Residentes:</strong></p>
+        <ul>
+            {% for resident_url in location.residents %}
+            <li>
+                <!-- Aqui você pode criar um link para o perfil do personagem -->
+                <a href="/profile/{{ resident_url.split('/')[-1] }}">Perfil do personagem</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
