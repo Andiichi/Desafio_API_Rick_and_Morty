@@ -1,6 +1,13 @@
 {% extends "layout.html" %}
 
 {% block content %}
+  <style>
+    .scroll-section {
+    max-height: 100px;
+    overflow-y: auto;
+  }
+  </style>
+
   <div class="row">
       
     <div class="col-sm-3 col-6">
@@ -9,6 +16,7 @@
     </div>
 
     <div class="col-sm-3 col-6">
+   
       <h1 class="display-5">{{profile.name}}</h1>
       <h1 class="h6"> 
         Status: 
@@ -32,7 +40,37 @@
       <h1 class="h6">Gender: {{ profile.gender }}</h1>
       <h1 class="h6">Origin: {{profile.origin['name']}}</h1>
       <h1 class="h6">Location: {{profile.location['name']}}</h1>
-      <h1 class="h6">Episodes: {{profile.episode}}</h1>
+      
+        <!-- Button triggers collapse -->
+<a
+class="btn btn-primary mb-3"
+data-mdb-collapse-init
+data-mdb-ripple-init
+href="#collapseWithScrollbar"
+role="button"
+aria-expanded="false"
+aria-controls="collapseExample"
+>
+Longer content
+</a>
 
+<!-- Collapsed content -->
+<div class="collapse scroll-section" id="collapseWithScrollbar"  style="max-width: 500px">
+Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
+ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them
+accusamus labore sustainable VHS. 3 wolf moon officia aute, non cupidatat skateboard dolor
+brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
+put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+</div>
+</div>
   </div>
+<!-- Script para inicializar componentes do MDB -->
+<script type="module">
+  import { Collapse, Ripple, initMDB } from 'mdb-ui-kit';
+  initMDB({ Collapse, Ripple });
+</script>
+
+
 {% endblock %}
