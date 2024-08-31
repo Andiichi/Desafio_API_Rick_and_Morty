@@ -48,4 +48,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+document.addEventListener('DOMContentLoaded', function () {
+  var modalButtons = document.querySelectorAll('[data-bs-toggle="modal"]');
 
+  modalButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+          var targetModal = button.getAttribute('data-bs-target');
+          var modalElement = document.querySelector(targetModal);
+          
+          if (modalElement) {
+              var modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+              modal.show();
+          }
+      });
+  });
+});

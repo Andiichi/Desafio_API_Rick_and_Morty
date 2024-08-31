@@ -45,6 +45,8 @@ def get_locations():
 
     return render_template('locations.html', locations=data_dict['results'])
 
+
+
 @app.route('/search', methods=['GET'])
 def search():
     query = request.args.get('query', '').lower()

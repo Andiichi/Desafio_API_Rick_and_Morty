@@ -40,37 +40,34 @@
       <h1 class="h6">Gender: {{ profile.gender }}</h1>
       <h1 class="h6">Origin: {{profile.origin['name']}}</h1>
       <h1 class="h6">Location: {{profile.location['name']}}</h1>
+      <br>
+      <h1 class="h7">Lista de episódios:</h1>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#locationModal{{ profile.id }}">
+        Ver mais
+      </button>
       
-        <!-- Button triggers collapse -->
-<a
-class="btn btn-primary mb-3"
-data-mdb-collapse-init
-data-mdb-ripple-init
-href="#collapseWithScrollbar"
-role="button"
-aria-expanded="false"
-aria-controls="collapseExample"
->
-Longer content
-</a>
-
-<!-- Collapsed content -->
-<div class="collapse scroll-section" id="collapseWithScrollbar"  style="max-width: 500px">
-Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
-ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them
-accusamus labore sustainable VHS. 3 wolf moon officia aute, non cupidatat skateboard dolor
-brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
-put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-</div>
-</div>
-  </div>
-<!-- Script para inicializar componentes do MDB -->
-<script type="module">
-  import { Collapse, Ripple, initMDB } from 'mdb-ui-kit';
-  initMDB({ Collapse, Ripple });
-</script>
-
+      <!-- Modal -->
+      <div class="modal fade" id="locationModal{{ profile.id }}" tabindex="-1" aria-labelledby="locationModalLabel{{ profile.id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="locationModalLabel{{ profile.id }}">Lista de episódios que {{ profile.name }} participa</h3>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ol>
+                  {% for episodes in profile.episode %}
+                    <!-- Aqui você pode criar um link para o perfil do personagem -->
+                    <li><h1 class="h6">{{episodes}}</h1></li>
+              {% endfor %}
+            </ol>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
 
 {% endblock %}
