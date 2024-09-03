@@ -41,9 +41,30 @@ def get_episodes():
 def get_locations():
     url = 'https://rickandmortyapi.com/api/location/'
     response = requests.get(url)
-    data_dict = response.json()
+    locations_dict = response.json()
+    
+    locations = []
 
-    return render_template('locations.html', locations=data_dict['results'])
+    for location in locations_dict['results']:
+        residents = []
+        for resident_url in location['residents']:
+            resident_response = requests.get(resident_url)
+            resident_data = resident_response.json()
+            residents.append({
+                'id': resident_data['id'],
+                'name': resident_data['name']
+            })
+
+        location_info = {
+            'id': location['id'],
+            'name': location['name'],
+            'type': location['type'],
+            'dimension': location['dimension'],
+            'residents': residents
+        }
+        locations.append(location_info)
+
+    return render_template('locations.html', locations=locations)
 
 
 

@@ -55,13 +55,15 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <ol>
-                  {% for episodes in profile.episode %}
-                    <!-- Aqui você pode criar um link para o perfil do personagem -->
-                    <li><h1 class="h6">{{episodes}}</h1></li>
-              {% endfor %}
-            </ol>
-            </div>
+              <ol>
+                  {% for resident in location.residents %}
+                  <li>
+                      <!-- Link para o perfil do personagem -->
+                      <a href="/profile/{{ resident.id }}">Personagem: {{ resident.name }} (ID: {{ resident.id }})</a>
+                  </li>
+                  {% endfor %}
+              </ol>
+          </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>

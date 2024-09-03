@@ -36,10 +36,10 @@
             </div>
             <div class="modal-body">
                 <ol>
-                    {% for resident_url in location.residents %}
+                    {% for resident in locations.residents %}
                 <li>
                     <!-- Aqui você pode criar um link para o perfil do personagem -->
-                    <a href="/profile/{{ resident_url.split('/')[-1] }}">Personagem: ID {{ resident_url.split('/')[-1] }}</a>
+                    <a href="/profile/{{ resident.['id'] }}">Personagem: ID {{ [resident.['name'] }}</a>
                 </li>
                 {% endfor %}
        
