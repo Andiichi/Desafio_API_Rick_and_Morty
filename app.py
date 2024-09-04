@@ -46,13 +46,17 @@ def get_locations():
     locations = []
 
     for location in locations_dict['results']:
+
         residents = []
+        
+        #montando o dict das infos necessárias do characters residentes da localidade
         for resident_url in location['residents']:
             resident_response = requests.get(resident_url)
             resident_data = resident_response.json()
             residents.append({
                 'id': resident_data['id'],
-                'name': resident_data['name']
+                'name': resident_data['name'],
+                'image': resident_data['image']  # Adiciona o campo de imagem
             })
 
         location_info = {
