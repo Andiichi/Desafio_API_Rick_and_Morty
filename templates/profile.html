@@ -56,14 +56,16 @@
             </div>
             <div class="modal-body">
               <ol>
-                  {% for resident in location.residents %}
+                {% for episode in profile['episode'] %}
                   <li>
-                      <!-- Link para o perfil do personagem -->
-                      <a href="/profile/{{ resident.id }}">Personagem: {{ resident.name }} (ID: {{ resident.id }})</a>
+                    <!-- Exibe o nome e link para o episódio -->
+                    <a href="/episodes/{{ episode.id}}">Episódio: {{ episode.name }} (ID: {{ episode.id }})</a>
                   </li>
-                  {% endfor %}
+                {% else %}
+                  <li>Nenhum episódio encontrado.</li>
+                {% endfor %}
               </ol>
-          </div>
+            </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
