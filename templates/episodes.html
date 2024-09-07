@@ -1,48 +1,52 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1 class="display-6">Lista de Episódios</h1>
-<br>
-<div class="col-md-3 col-4">
-<div class=" mt-2 d-flex justify-content-between ">
-    {% for episode in episodes %}
-  
-        <h2 class="h5">{{ episode.name }} (Season {{ episode.episode }})</h2>
-        <p class="h5"><strong>Air Date:</strong> {{ episode.air_date }}</p>
+<h1 class="display-6 text-center mb-4 mt-4">Lista de Episódios</h1>
 
-        <!-- Botão para abrir o modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#locationModal{{ episode.id }}">
-            Ver personagens
-        </button>
-        <br>
-        <br>
-        <!-- Modal -->
-        <div class="modal fade" id="locationModal{{ episode.id }}" tabindex="-1" aria-labelledby="locationModalLabel{{ episode.id }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="locationModalLabel{{ episode.id }}">Lista de personagens</h3>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for episode in episodes %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h2 class="h5 mb-3">{{ episode.name }} (Season {{ episode.episode }})</h2>
+                <p class="h6 mb-4"><strong>Air Date:</strong> {{ episode.air_date }}</p>
+
+                <!-- Botão para abrir o modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#locationModal{{ episode.id }}">
+                    Ver personagens
+                </button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="locationModal{{ episode.id }}" tabindex="-1"
+                aria-labelledby="locationModalLabel{{ episode.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="locationModalLabel{{ episode.id }}">Lista de personagens</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <ol>
+                                {% for character_url in episode.characters %}
+                                <li>
+                                    <!-- Aqui você pode criar um link para o perfil do personagem -->
+                                    <a href="/profile/{{ character_url.split('/')[-1] }}">Personagem: #{{
+                                        character_url.split('/')[-1] }}</a>
+                                </li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <ol>
-                            {% for character_url in episode.characters %}
-                            <li>
-                                <!-- Aqui você pode criar um link para o perfil do personagem -->
-                                <a href="/profile/{{ character_url.split('/')[-1] }}">Personagem: #{{ character_url.split('/')[-1] }}</a>
-                            </li>
-                            {% endfor %}
-                        </ol>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    </div>
-                    
                 </div>
             </div>
         </div>
-
+    </div>
     {% endfor %}
 </div>
-</div>
+
 {% endblock %}

@@ -3,29 +3,44 @@ import requests, json
 
 app = Flask(__name__)
 
-
+# Redireciona para a primeira página de personagens
 @app.route('/')
 def get_page():
-    return redirect(url_for('get_list_characters_page'))
-
+    return redirect(url_for('get_list_characters_page', page=1))
 
 
 
 @app.route('/characters')
 def get_list_characters_page():
-    page_id = request.args.get('page', 1)  # Pega o número da página da query string, default 1
+    # Obtém o número da página da query string, por padrão é 1
+    page_id = request.args.get('page', 1, type=int)
+
+    # URL da API com a página solicitada
     url = f'https://rickandmortyapi.com/api/character?page={page_id}'
     response = requests.get(url)
     data_dict = response.json()
 
-    # Extraindo os dados da paginação
+    # Extraindo os dados de paginação
     next_page = data_dict['info']['next']
     prev_page = data_dict['info']['prev']
+    total_pages = data_dict['info']['pages']  # Número total de páginas
 
-    return render_template('characters.html', 
-                           characters=data_dict['results'], 
-                           next_page=next_page, 
-                           prev_page=prev_page)
+    # Determinando o intervalo de páginas para exibir
+    start_page = max(page_id - 1, 1)
+    end_page = min(page_id + 2, total_pages)
+
+    # Determinando o próximo e o anterior com base no número da página atual
+    next_page_num = page_id + 1 if next_page else None
+    prev_page_num = page_id - 1 if prev_page else None
+
+    return render_template('characters.html',
+                           characters=data_dict['results'],
+                           current_page=page_id,
+                           total_pages=total_pages,
+                           next_page=next_page_num,
+                           prev_page=prev_page_num,
+                           start_page=start_page,
+                           end_page=end_page)
 
 
 

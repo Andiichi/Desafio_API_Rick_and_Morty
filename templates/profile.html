@@ -3,45 +3,37 @@
 {% block content %}
   <style>
     .scroll-section {
-    max-height: 100px;
-    overflow-y: auto;
-  }
+      max-height: 100px;
+      overflow-y: auto;
+    }
   </style>
-
-  <div class="row">
-      
-    <div class="col-sm-3 col-6">
-      <img src="{{profile.image}}" alt="{{profile.name}}" 
-      class=" img-fluid img-thumbnail" />
-    </div>
-
-    <div class="col-sm-3 col-6">
-   
-      <h1 class="display-5">{{profile.name}}</h1>
-      <h1 class="h6"> 
-        Status: 
+  
+  <div class="row row-cols-1 row-cols-md-5 g-5">
+    <div class="col">
+      <img src="{{ profile.image }}" alt="{{ profile.name }}" class="img-fluid img-thumbnail" />
+      <h1 class="display-5">{{ profile.name }}</h1>
+      <h2 class="h6">Status:
         {% if profile.status == "Dead" %}
-            <span class="text-danger">{{profile.status}}</span>
+          <span class="text-danger">{{ profile.status }}</span>
         {% elif profile.status == "Alive" %}
-            <span class="text-success">{{profile.status}}</span>
+          <span class="text-success">{{ profile.status }}</span>
         {% else %}
-            {{profile.status}}
+          {{ profile.status }}
         {% endif %}
-      </h1>
-      <h1 class="h6">Specie: {{profile.species}}</h1>
-      <h1 class="h6">
-        Type: 
+      </h2>
+      <h2 class="h6">Species: {{ profile.species }}</h2>
+      <h2 class="h6">Type:
         {% if profile.type == "" %}
-            Not specified
+          Not specified
         {% else %}
-            {{profile.type}}
+          {{ profile.type }}
         {% endif %}
-      </h1>
-      <h1 class="h6">Gender: {{ profile.gender }}</h1>
-      <h1 class="h6">Origin: {{profile.origin['name']}}</h1>
-      <h1 class="h6">Location: {{profile.location['name']}}</h1>
+      </h2>
+      <h2 class="h6">Gender: {{ profile.gender }}</h2>
+      <h2 class="h6">Origin: {{ profile.origin['name'] }}</h2>
+      <h2 class="h6">Location: {{ profile.location['name'] }}</h2>
       <br>
-      <h1 class="h7">Lista de episódios:</h1>
+      <h3 class="h7">Lista de episódios:</h3>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#locationModal{{ profile.id }}">
         Ver mais
       </button>
@@ -58,8 +50,7 @@
               <ol>
                 {% for episode in profile['episode'] %}
                   <li>
-                    <!-- Exibe o nome e link para o episódio -->
-                    <a href="/episodes/{{ episode.id}}">Episódio: {{ episode.name }} (ID: {{ episode.id }})</a>
+                    <a href="/episodes/{{ episode.id }}">Episódio: {{ episode.name }} (ID: {{ episode.id }})</a>
                   </li>
                 {% else %}
                   <li>Nenhum episódio encontrado.</li>
@@ -72,6 +63,7 @@
           </div>
         </div>
       </div>
- 
+    </div>
+  </div>
 
 {% endblock %}
