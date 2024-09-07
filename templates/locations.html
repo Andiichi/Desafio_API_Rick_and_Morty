@@ -20,7 +20,7 @@
         <td>{{ location.type }}</td>
         <td>{{ location.dimension }}</td>
         <td>
-          <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#locationModal{{ location.id }}">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#locationModal{{ location.id }}">
             Views Residents
           </button>
         </td>
@@ -37,7 +37,7 @@
             <div class="modal-body">
 
               <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-                {% for resident in location.residents %}
+                {% for resident in locations.residents %}
                 <div class="col">
 
                   <div class="card h-100">
@@ -45,7 +45,7 @@
                         <img src="{{ resident.image }}" class="img-thumbnail me-2" alt="{{ resident.name }}" style="width: 90px; height: 90px;">
                         <div>
                             <h6 class="card-title mb-1"> <span class="fst-italic" tyle="width: 6rem;">#{{ resident.id }}</span> -  {{ resident.name }}</h6>
-                            <a href="/profile/{{ resident.id }}" class="btn btn-dark btn-sm mt-2 h-100 w-100">Ver Perfil</a>
+                            <a href="/profile/{{ resident.id }}" class="btn btn-primary btn-sm mt-2 h-100 w-100">Ver Perfil</a>
                         </div>
                     </div>
                 </div>
